@@ -1,0 +1,22 @@
+exports = module.exports= function (app,mongoose){
+	//console.log("Inside Model.js");
+	require('./schema/addressSchema') (app, mongoose);
+	require('./schema/bloodGroupSchema') (app, mongoose);
+	require('./schema/breedSchema') (app, mongoose);
+	require('./schema/generalListSchema') (app, mongoose);
+	require('./schema/petSchema') (app, mongoose);
+	require('./schema/petTypeSchema') (app, mongoose);
+	require('./schema/qualificationSchema') (app, mongoose);
+	require('./schema/ratingSchema') (app, mongoose);
+	require('./schema/serviceConnectionSchema') (app, mongoose);
+	require('./schema/serviceProviderSchema') (app, mongoose);
+	require('./schema/servSubTypeSchema') (app, mongoose);
+	require('./schema/servTypeSchema') (app, mongoose);
+	require('./schema/statusSchema') (app, mongoose);
+	require('./schema/storeSchema') (app, mongoose);
+	require('./schema/surgeryDiseaseSchema') (app, mongoose);
+	require('./schema/userConnectionSchema') (app, mongoose);
+	require('./schema/userSchema') (app, mongoose);
+	require('./schema/vaccinationConnectionSchema') (app, mongoose);
+	require('./schema/vaccinationSchema') (app, mongoose);
+};
