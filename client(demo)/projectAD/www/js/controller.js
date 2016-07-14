@@ -1,4 +1,4 @@
-projectAD.controller('testCtrl', ['$scope','$http', 'API', function($scope, $http, API){
+projectAD.controller('testCtrl', ['$scope','API', function($scope,API){
 	console.log("I am in controller!!! ");
 	
 	// onLoad
