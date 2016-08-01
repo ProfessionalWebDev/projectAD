@@ -1,32 +1,35 @@
 <ion-view title="Sign Up" class=" ">
     <ion-content padding="true" class="has-header">
-        <form id="signUp-form2" class="list ">
+        <form class="list ">
             <label class="item item-input " id="signUp-input3" name="fName">
                 <span class="input-label">fName</span>
-                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="First Name" ng-model = "servPro.spFirstName">
             </label>
             <label class="item item-input " id="signUp-input10" name="lName">
                 <span class="input-label">lName</span>
-                <input type="text" placeholder="Last Name">
+                <input type="text" placeholder="Last Name" ng-model = "servPro.spLastName">
             </label>
             <label class="item item-input " id="signUp-input11" name="lName">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="email">
+                <input type="text" placeholder="email" ng-model = "servPro.spEmail">
             </label>
             <label class="item item-input " id="signUp-input12" name="phone">
                 <span class="input-label">Phone</span>
-                <input type="tel" placeholder="Phone">
+                <input type="tel" placeholder="Phone" ng-model = "servPro.spPhone">
             </label>
             <label class="item item-input " id="signUp-input4">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" ng-model = "servPro.password" name="password" >
             </label>
             <label class="item item-input " id="signUp-input13" name="ConfirmPassword">
                 <span class="input-label">Confirm Password</span>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" ng-model = "confirmPass">
             </label>
+			<div>
+				<button type="submit" ng-click="signup()" class=" button button-positive  button-block ">Sign Up</button>
+			</div>	
         </form>
 		<!--<a href="#/login"> Login </a>-->
-        <button id="signUp-button2" class=" button button-positive  button-block " ng-click= "signup()">Sign Up</button>
+        
     </ion-content>
 </ion-view>

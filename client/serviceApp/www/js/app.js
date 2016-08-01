@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var serveApp = angular.module('serveApp', ['ionic']);
+var serveApp = angular.module('serveApp', ['ionic','satellizer','angularValidator']);
 
 serveApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -91,10 +91,14 @@ serveApp.config(function($stateProvider, $urlRouterProvider) {
 	  views: {
         'menuContent': {
           templateUrl: 'templates/changePassword.html',
-		  controller: 'chanegePasswordCtrl'
+		  controller: 'changePasswordCtrl'
         }
       }	  
   })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
+});
+
+serveApp.config(function($authProvider, ipAddress){
+	$authProvider.baseUrl = ipAddress;
 });

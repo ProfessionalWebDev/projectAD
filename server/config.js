@@ -1,3 +1,4 @@
 module.exports= {
-	MONGO_URI:process.env.MONGO_URI || 'localhost/ProjectAD'	
+	MONGO_URI:process.env.MONGO_URI || 'localhost/ProjectAD',
+	TOKEN_SECRET:'JWT secret'	
 };

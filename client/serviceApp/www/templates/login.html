@@ -3,11 +3,11 @@
         <form id="loginPage-form1" class="list ">
             <label class="item item-input " id="loginPage-input8" name="Email">
                 <span class="input-label">Email/Phone</span>
-                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Email" ng-model = "$parent.spEmailOrPhone" ng-blur = "feildCheck()">
             </label>
             <label class="item item-input " id="loginPage-input2" name="Pwd">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" ng-model = "servPro.password">
             </label>
         </form>
 		<a href="#/signup"> Sign Up </a> </br>

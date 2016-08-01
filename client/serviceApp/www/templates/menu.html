@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+ <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
@@ -21,16 +21,18 @@
 		<ion-item menu-close href="#/app/home">
           Home
         </ion-item>
-        <ion-item menu-close href="#/app/page1">
-          Page1
-        </ion-item>
-        <ion-item menu-close href="#/app/page2">
-          Page2
-        </ion-item>
+		<div ng-repeat = "opt in menuOptions">
+			<ion-item ng-click = "toggleOptions(opt)"> 
+			  {{opt.name}}
+			</ion-item>
+			<ion-item menu-close ng-repeat = "item in opt.items" ng-show = "opt.show" ng-click = "toggleSubOptions(item)">
+			  {{item.itemName}}
+			</ion-item>
+		</div>
 		<ion-item menu-close href="#" ui-sref="app.resetpass">
           Reset Password
         </ion-item>
-		<ion-item menu-close href="#" ui-sref="login">
+		<ion-item menu-close href="#" ng-click="logout()">
           Logout
         </ion-item>
       </ion-list>

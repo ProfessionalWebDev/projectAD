@@ -17,6 +17,14 @@ module.exports = function (app){
 	
 	app.post('/api/saveUser', require('./demo/api/demoApi/demoApi').saveUser);
 	
+	
+	//GENERAL ROUTES >>>>>>>>>
+	// General Routes are listed here .......
+	app.post('/auth/signup', require('./projectAD/general/generalApi.js').SignUp);
+	app.post('/auth/login', require('./projectAD/general/generalApi.js').Login);
+	
+	
+	
 	//ADMIN ROUTES >>>>>>>>
 	// Admin Routes are listed here ........	
 	

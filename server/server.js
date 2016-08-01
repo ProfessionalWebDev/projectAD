@@ -6,12 +6,12 @@ var bodyParser = require('body-parser');
 autoIncrement = require('mongoose-auto-increment');
 
 // Including Config File
-var config = require('./config');
+app.config = require('./config');
 
 app.schema= {};
 
 // Mongoose Connection
-var connection = mongoose.connect(config.MONGO_URI);
+var connection = mongoose.connect(app.config.MONGO_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -22,30 +22,39 @@ db.once('open', function() {
 autoIncrement.initialize(db)
 require('./model')(app, mongoose);
 
-// Add headers
+
 app.use(function (req, res, next) {
 
-// Website you wish to allow to connect
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
-// Request methods you wish to allow
-res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-// Request headers you wish to allow
-res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-// Set to true if you need the website to include cookies in the requests sent
-// to the API (e.g. in case you use sessions)
-res.setHeader('Access-Control-Allow-Credentials', true);
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
-// Pass to next layer of middleware
-next();
+    // Pass to next layer of middleware
+    next();
 });
+
+/*app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});*/
 
 var routes = require('./routes')(app);
 
 // For Demo App Files
 app.demo = require('./demo/demo/demo');
+
+// For General Files
+app.general = require('./projectAD/general/generalFunc');
 
 // For User App Files
 app.userGeneral = require('./projectAD/userApp/userFunc/userGeneral');

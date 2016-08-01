@@ -30,6 +30,11 @@ exports=module.exports = function (app, mongoose) {
 		lastModified: {type: Date, default: new Date()}
 		//heredity
 		//uniqueid for microchip
+		//menstruation cycle
+		//reminder
+		//medicines
+		//water change and medication (fish)
+		//bath date
 		
 	});
 	var pets = mongoose.model('pets', petSchema);

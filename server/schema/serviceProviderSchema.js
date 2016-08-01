@@ -4,9 +4,11 @@ exports=module.exports = function (app, mongoose) {
 		spFirstName: {type: String, default: ""},
 		spLastName: {type: String, default: ""},
 		spEmail: String,
-		spPhone: Number,
+		spPhone: String, //ToDo: Change to Number
 		spProfilePicURL: String,
 		spVideoURL: String,
+		hashedPassword: String,
+		salt: String,
 		spAddress: {type: mongoose.Schema.Types.Number, ref: 'address'}, // Residence Address
 		spLoc: {
 			latitude: Number,
