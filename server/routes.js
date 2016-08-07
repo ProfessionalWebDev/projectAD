@@ -20,6 +20,8 @@ module.exports = function (app){
 	
 	//GENERAL ROUTES >>>>>>>>>
 	// General Routes are listed here .......
+	app.post('/otpcreation', require('./projectAD/general/generalApi.js').otpCreation);
+	app.post('/otpvalidation', require('./projectAD/general/generalApi.js').otpValidation);
 	app.post('/auth/signup', require('./projectAD/general/generalApi.js').SignUp);
 	app.post('/auth/login', require('./projectAD/general/generalApi.js').Login);
 	

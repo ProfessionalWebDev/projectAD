@@ -4,6 +4,7 @@ exports = module.exports= function (app,mongoose){
 	require('./schema/bloodGroupSchema') (app, mongoose);
 	require('./schema/breedSchema') (app, mongoose);
 	require('./schema/generalListSchema') (app, mongoose);
+	require('./schema/otpSchema') (app, mongoose);
 	require('./schema/petSchema') (app, mongoose);
 	require('./schema/petTypeSchema') (app, mongoose);
 	require('./schema/qualificationSchema') (app, mongoose);

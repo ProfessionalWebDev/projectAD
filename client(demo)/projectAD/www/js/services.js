@@ -11,17 +11,17 @@ return{
       method: 'GET'
     });
   },
-  saveItem: function(apiUrl, form) {
+  postOne: function(apiUrl, form) {
     return $http.post(base + apiUrl, form, {
       method: 'POST'
     });
   },
-  putItem: function(apiUrl, id, form) {
+  putOne: function(apiUrl, id, form) {
     return $http.put(base + apiUrl + id, form, {
       method: 'PUT'
     });
   },
-  deleteItem: function(apiUrl, id) {
+  deleteOne: function(apiUrl, id) {
     return $http.delete(base + apiUrl + id, {
       method: 'DELETE'
     });

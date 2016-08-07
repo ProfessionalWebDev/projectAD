@@ -9,7 +9,7 @@ projectAD.controller('testCtrl', ['$scope','API', function($scope,API){
 	// onclick of Save
 	$scope.save = function(){
 		console.log("Save Function: ",$scope.user);
-		API.saveItem('/api/saveUser', $scope.user).success(function(response){
+		API.postOne('/api/saveUser', $scope.user).success(function(response){
 			if(response.message == 'success'){
 				$scope.name = "SAVED SUCCESSFULLY!!! CLIENT, SERVER AND MONGODB IS CONNECTED"
 				console.log("RESPONSE: ",response);
