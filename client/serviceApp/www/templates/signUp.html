@@ -1,33 +1,89 @@
 <ion-view title="Sign Up" class=" ">
     <ion-content padding="true" class="has-header">
-        <form class="list ">
-            <label class="item item-input " id="signUp-input3" name="fName">
+        <form id="signUp-form2" angular-validator angular-validator-submit="signup()" name="myForm" class="form-horizontal" novalidate angular-validator>
+            <label class="col-sm-2 control-label" id="signUp-input3" name="fName">
                 <span class="input-label">fName</span>
-                <input type="text" placeholder="First Name" ng-model = "servPro.spFirstName">
+                <input type="text"
+				class = "form-control"				
+				name="firstName" 
+				placeholder="First Name"  
+				validate-on="dirty"
+				ng-model = "servPro.spFirstName" 
+				validator = "nameValidator(servPro.spFirstName) === true" 
+				required-message="'This is required'" 
+				invalid-message = "nameValidator(servPro.spFirstName)" 
+				required>
             </label>
-            <label class="item item-input " id="signUp-input10" name="lName">
+
+			
+            <label class="col-sm-2 control-label" id="signUp-input10" name="lName">
                 <span class="input-label">lName</span>
-                <input type="text" placeholder="Last Name" ng-model = "servPro.spLastName">
+                <input type="text" 
+				class = "form-control"
+				name="lastName" 				
+				placeholder="Last Name" 
+				validate-on="dirty"
+				ng-model = "servPro.spLastName" 
+				validator = "nameValidator(servPro.spLastName) === true" 
+				required-message = "'This is required'" 
+				invalid-message = "nameValidator(servPro.spLastName)" 
+				required>
             </label>
-            <label class="item item-input " id="signUp-input11" name="lName">
+            <label class="col-sm-2 control-label" id="signUp-input11" name="lName">
                 <span class="input-label">Email</span>
-                <input type="text" placeholder="email" ng-model = "servPro.spEmail">
+                <input type="text"
+				name="email" 
+				class = "form-control"
+				placeholder="email" 
+				validate-on="dirty"
+				ng-model = "servPro.spEmail" 
+				validator = "emailValidator(servPro.spEmail) === true" 
+				required-message = "'This is required'" 
+				invalid-message = "emailValidator(servPro.spEmail)" 
+				required>
             </label>
-            <label class="item item-input " id="signUp-input12" name="phone">
+            <label class="col-sm-2 control-label" id="signUp-input12" name="phone">
                 <span class="input-label">Phone</span>
-                <input type="tel" placeholder="Phone" ng-model = "servPro.spPhone">
+                <input type="tel" 
+				name="phone" 
+				class = "form-control"
+				placeholder="Phone" 
+				ng-maxlength="10"
+				validate-on="dirty"
+				ng-model = "servPro.spPhone" 
+				validator = "phoneValidator(servPro.spPhone) === true" 
+				required-message = "'This is required'" 
+				invalid-message = "phoneValidator(servPro.spPhone)" 
+				required>
             </label>
-            <label class="item item-input " id="signUp-input4">
+            <label class="col-sm-2 control-label" id="signUp-input4" name="password">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="Password" ng-model = "servPro.password" name="password" >
+                <input type="password" 
+				name="password" 
+				class = "form-control"
+				placeholder="Password"
+				ng-maxlength = "16"
+				validate-on="dirty"
+				ng-model = "servPro.password" 
+				validator = "passwordValidator(servPro.password) === true" 
+				required-message = "'This is required'" 
+				invalid-message = "passwordValidator(servPro.password)" 
+				required>
             </label>
-            <label class="item item-input " id="signUp-input13" name="ConfirmPassword">
+            <label class="col-sm-2 control-label" id="signUp-input13" name="ConfirmPassword">
                 <span class="input-label">Confirm Password</span>
-                <input type="password" placeholder="Password" ng-model = "confirmPass">
+                <input type="password" 
+				name="confirmPassword" 
+				class = "form-control"
+				placeholder="Password" 
+				validate-on="dirty"
+				ng-model = "$parent.confirmPass" 
+				validator = "confirmPasswordValidator($parent.confirmPass,servPro.password) === true" 
+				required-message = "'This is required'" 
+				invalid-message = "confirmPasswordValidator($parent.confirmPass,servPro.password)" 
+				required>
             </label>
-			<div>
-				<button type="submit" ng-click="signup()" class=" button button-positive  button-block ">Sign Up</button>
-			</div>	
+			<button type="submit" id="signUp-button2" class=" button button-positive  button-block">Sign Up</button>
         </form>
 		<!--<a href="#/login"> Login </a>-->
         

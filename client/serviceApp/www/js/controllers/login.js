@@ -1,19 +1,18 @@
-serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API', function($scope,$state,$auth,API){
+serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API','Validator', function($scope,$state,$auth,API,Validator){
 	$scope.servPro = {};
 	console.log("I am in login controller!!! ");
 	$scope.feildCheck = function() {
 		$scope.servPro = {};
 		if($scope.spEmailOrPhone != null){
-			if(($scope.spEmailOrPhone).match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-				console.log("EMAIL");
+			if(Validator.emailValidator($scope.spEmailOrPhone) == true){
 				$scope.servPro.spEmail = $scope.spEmailOrPhone;
-			} else if(($scope.spEmailOrPhone).match(/(^((\+\d{1,2}|1)[\s.-]?)?\(?[2-9](?!11)\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{4}$|^$)/)){
-				console.log("PHONE");
+			} else if(Validator.phoneValidator($scope.spEmailOrPhone) == true){
 				$scope.servPro.spPhone = $scope.spEmailOrPhone;
 			} else {
-				console.log("INVALID");
+				return "Invalid Credentials";
 			}
-		}		
+			return true;
+		} 		
 	};
 	$scope.login = function() {
 		console.log("In LOGIN",$scope.servPro);
@@ -34,7 +33,18 @@ serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API', function($sc
 		  .catch(function(response) {
 			// Handle errors here.
 		  });
-	};	
+	};
+		$scope.emailValidator = function(email) {
+			return Validator.emailValidator(email);
+		};
+		
+		$scope.phoneValidator = function(phoneNo) {
+			return Validator.phoneValidator(phoneNo);
+		};
+		
+		/*$scope.passwordValidator = function(password) {
+			return Validator.passwordValidator(password);
+		};*/
 	
 	$scope.authenticate = function(provider) {
 		$auth.authenticate(provider)
