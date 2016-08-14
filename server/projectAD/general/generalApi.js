@@ -29,10 +29,11 @@ exports.otpCreation = function(req, res){
 					res.json({'message' : "Sorry, Unexpected Error, Try Again."});
 				} else {
 					console.log("After otpGeneation: ",otp);
+					var now = new Date();
 					var newOtpDoc = {
 						phoneNumber : otpData.phone,
 						otpNumber : otp,
-						expireTime : Date.now() + req.app.config.otpExpiryTime
+						expireTime : now.setMinutes(now.getMinutes() + req.app.config.otpExpiryTime)
 					};
 					eventEmitter.emit('saveOtp',newOtpDoc);
 				}
@@ -56,7 +57,11 @@ exports.otpCreation = function(req, res){
 	});
 	
 	eventEmitter.on('sendOtpMessage', function(otpDoc){
-		req.app.general.sendSms(req.app, function(err, resp){ 
+		var data = {
+			message: 'OTP Number is:' + otpDoc.otpNumber, 
+			to: otpDoc.phoneNumber
+		}
+		req.app.general.sendSms(data,req.app, function(err, resp){
 				if(err){
 					console.log("ERROR IN SENDING MESSAGE (OTP CREATION): ",err);
 					res.json({'message' : "Sorry, Unexpected Error, Try Again."});
@@ -76,8 +81,8 @@ exports.otpCreation = function(req, res){
 		var otpData = {
 			phone : req.body.phone,
 			email : req.body.email,
-			phoneKey : "phone",
-			emailKey : "email",
+			phoneKey : "spPhone",
+			emailKey : "spEmail",
 			collection : req.app.schema.serviceProviders
 		};
 		eventEmitter.emit('checkIfExisting', otpData);
@@ -86,7 +91,44 @@ exports.otpCreation = function(req, res){
 
 exports.otpValidation = function(req, res){
 	console.log("INSIDE otpValidation",req.body);
-	// toDo : validation
+	var eventEmitter = new events.EventEmitter();
+	
+	eventEmitter.on('getValidOtp', function(){
+		req.app.general.getOtp(req.body.phoneNumber, req.app, function(err, resp){
+			if(err){
+				console.log("ERROR IN COMPARING DATES (OTP VALIDATION): ",err);
+				res.json({'message' : "Sorry, Unexpected Error, Try Again."});
+			} else {
+				eventEmitter.emit('checkExpiry',req.body.otpValue , resp);
+			}			
+		});
+	});
+	
+	eventEmitter.on('checkExpiry', function(inputOtp, otpData){
+		req.app.general.compareDateWithCurrentDate(otpData.expireTime, req.app, function(err, resp){			
+			if(err){
+				console.log("ERROR IN COMPARING DATES (OTP VALIDATION): ",err);
+				res.json({'message' : "Sorry, Unexpected Error, Try Again."});
+			} else {
+				console.log("EXPIRY: ",resp);
+				if(resp == "future"){
+					eventEmitter.emit('compareOtps', inputOtp, otpData);
+				} else {
+					res.json({'message' : "expired"});
+				}
+			}
+		});
+	});
+	
+	eventEmitter.on('compareOtps', function(inputOtp, otpData){
+		if(inputOtp == otpData.otpNumber){
+			res.json({'message' : "success"});
+		} else {
+			res.json({'message' : "wrong"});
+		}
+	});
+	
+	eventEmitter.emit('getValidOtp');
 };
 
 exports.SignUp = function(req, res){
@@ -110,6 +152,7 @@ exports.SignUp = function(req, res){
 	});
 	
 	eventEmitter.on('saveData', function(signUpData){
+		console.log("Inside Savedata!!!!!!!!!!!!!!!!!!!!!!")
 		var saveData = {
 			[signUpData.firstNameKey] : signUpData.firstName,
 			[signUpData.lastNameKey] : signUpData.lastName,

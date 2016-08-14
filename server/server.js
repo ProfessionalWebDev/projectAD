@@ -66,6 +66,5 @@ app.servGeneral = require('./projectAD/serviceApp/servFunc/servGeneral');
 // OPTIONAL ----->> app.use(express.static(path.join(__dirname,"/../Client")));
 app.use(bodyParser.json());
 
-
 app.listen(3000);
 console.log("server running on port 3000");

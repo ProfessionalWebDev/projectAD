@@ -77,10 +77,10 @@
 				class = "form-control"
 				placeholder="Password" 
 				validate-on="dirty"
-				ng-model = "$parent.confirmPass" 
-				validator = "confirmPasswordValidator($parent.confirmPass,servPro.password) === true" 
+				ng-model = "confirmPass" 
+				validator = "confirmPasswordValidator(confirmPass,servPro.password) === true" 
 				required-message = "'This is required'" 
-				invalid-message = "confirmPasswordValidator($parent.confirmPass,servPro.password)" 
+				invalid-message = "confirmPasswordValidator(confirmPass,servPro.password)" 
 				required>
             </label>
 			<button type="submit" id="signUp-button2" class=" button button-positive  button-block">Sign Up</button>

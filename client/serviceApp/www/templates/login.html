@@ -1,33 +1,17 @@
 <ion-view title="Login Page" class=" ">
     <ion-content padding="true" class="has-header">
-        <form id="loginPage-form1" angular-validator angular-validator-submit="login()" name="loginForm" class="form-horizontal" novalidate angular-validator>
-            <label class="col-sm-2 control-label" id="loginPage-input8" name="Email">
+        <form id="loginPage-form1" class="list ">
+            <label class="item item-input " id="loginPage-input8" name="Email">
                 <span class="input-label">Email/Phone</span>
-                <input type="text" 
-				name = "Email/Phone"
-				placeholder="Email/Phone" 
-				class = "form-control"
-				ng-model = "$parent.spEmailOrPhone"
-				validate-on = "touched"
-				validator = "feildCheck() === true"
-				required-message="'This is required'"
-				invalid-message = "feildCheck()"
-				required>
+                <input type="text" placeholder="Email" ng-model = "$parent.spEmailOrPhone" ng-blur = "feildCheck()">
             </label>
-            <label class="col-sm-2 control-label" id="loginPage-input2" name="Pwd">
+            <label class="item item-input " id="loginPage-input2" name="Pwd">
                 <span class="input-label">Password</span>
-                <input type="password" 
-				name="password" 
-				class = "form-control"
-				placeholder="Password"
-				ng-model = "servPro.password"
-				required-message="'This is required'"
-				required>
+                <input type="password" placeholder="Password" ng-model = "servPro.password">
             </label>
-		<button id="loginPage-button1" class=" button button-positive  button-block" >Login</button>
         </form>
 		<a href="#/signup"> Sign Up </a> </br>
 		<a href="#/forgotpass"> Forgot Password? </a> 
-        
+        <button id="loginPage-button1" class=" button button-positive  button-block" ng-click="login()">Login</button>
     </ion-content>
 </ion-view>

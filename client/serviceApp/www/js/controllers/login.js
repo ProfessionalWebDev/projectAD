@@ -5,8 +5,10 @@ serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API','Validator', 
 		$scope.servPro = {};
 		if($scope.spEmailOrPhone != null){
 			if(Validator.emailValidator($scope.spEmailOrPhone) == true){
+				console.log("EMAILlll");
 				$scope.servPro.spEmail = $scope.spEmailOrPhone;
 			} else if(Validator.phoneValidator($scope.spEmailOrPhone) == true){
+				console.log("PHONEeee");
 				$scope.servPro.spPhone = $scope.spEmailOrPhone;
 			} else {
 				return "Invalid Credentials";
@@ -42,9 +44,9 @@ serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API','Validator', 
 			return Validator.phoneValidator(phoneNo);
 		};
 		
-		/*$scope.passwordValidator = function(password) {
+		$scope.passwordValidator = function(password) {
 			return Validator.passwordValidator(password);
-		};*/
+		};
 	
 	$scope.authenticate = function(provider) {
 		$auth.authenticate(provider)

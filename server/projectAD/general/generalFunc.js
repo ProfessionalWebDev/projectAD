@@ -15,10 +15,26 @@ exports.otpGeneation = function(app, callback){
 	callback("",code);
 };
 
-exports.sendSms = function(app, callback){
+exports.sendSms = function(data,app, callback){
+	var twilioApi = require('twilio/lib/')(app.config.TWILIO_ACCOUNT_SID,app.config.TWILIO_AUTH_TOKEN);
 	// TWILIO IMPLEMENTATION
-	//if success -->
-	callback("",{'msg' : 'sent'});
+	twilioApi.sendMessage({
+		
+		//Remove the above line after we buy twilio
+		to: '+919900185890',
+		//Replace with the line below
+		//to: data.to,
+		from: app.config.TWILIO_PHONE_NUMBER,    
+		body: data.message,
+	},
+	function(error, message) {
+    if (error) {
+		console.log('Oops! There was an error.',error);		
+    } else {
+        //if success -->
+		callback("",{'msg' : 'sent'});		
+    }
+	});
 };
 
 
@@ -70,12 +86,17 @@ exports.createDocument = function(toSaveBody, collection, app, callback){
 
 exports.updateOrUpsert = function(uniqueID, toSaveBody, collection, app, callback){
 	console.log("TOSAVEBODY",toSaveBody)
-	collection.findOneAndUpdate({[uniqueID.key] : uniqueID.value}, toSaveBody, {upsert:true}, function(err, doc){
+	collection.findOneAndUpdate({[uniqueID.key] : uniqueID.value}, toSaveBody, {"new":true, "upsert":true}, function(err, doc){   // toDo: Sometimes gives error .. to check again
 	   if(err){
 		  console.log("Error: ", err);
 		  callback(err, "");
 	   } else {
-		   callback("", {'msg' : "created", 'data' : doc});
+		   console.log("Doc: ",doc)
+		   if(doc){
+			   callback("", {'msg' : "created", 'data' : doc});
+		   } else {
+			   callback("Not Created","");
+		   }		   
 	   }
 	});
 };
@@ -88,4 +109,33 @@ exports.createJWT = function(inputObject, app, callback){
         exp: moment().add(14, 'days').unix()
     };
 	callback("", jwt.encode(payload, app.config.TOKEN_SECRET));
-}
+};
+
+
+exports.getOtp = function(phoneNumber, app, callback){
+	app.schema.otps.find({phoneNumber: phoneNumber}, function(err, otpData){
+		//console.log("otp data: ",otpData);
+		if(err){
+			callback(err, "");
+		} else {
+			callback("", otpData[0]);
+		}		
+	})
+};
+
+exports.compareDateWithCurrentDate = function(inputDate, app, callback){
+	var currentDate = new Date();
+	//var m = moment.isBefore('2014-07-14');
+	console.log("Current Date: ",currentDate);
+	console.log("Input Date: ",inputDate);
+	//console.log("M value: ",m);
+	
+	if(currentDate.getTime() > inputDate.getTime()){ // toDo: check the logic again .. 
+		console.log("past");
+		callback("","past");
+	} else {
+		console.log("future");
+		callback("","future");
+	}
+	
+};
