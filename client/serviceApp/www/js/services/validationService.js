@@ -4,7 +4,7 @@ serveApp.service('Validator', function () {
 		if(/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(name)) {
 				return true;
 			} else {
-				return "Should be alphanumerical.";
+				return "Should be alphabets only.";
 			}
 	}    
 

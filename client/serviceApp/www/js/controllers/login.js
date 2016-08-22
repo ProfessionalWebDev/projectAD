@@ -36,15 +36,9 @@ serveApp.controller('loginCtrl', ['$scope','$state','$auth' ,'API','Validator', 
 			// Handle errors here.
 		  });
 	};
-		$scope.emailValidator = function(email) {
-			return Validator.emailValidator(email);
-		};
-		
-		$scope.phoneValidator = function(phoneNo) {
-			return Validator.phoneValidator(phoneNo);
-		};
-		
+			
 		$scope.passwordValidator = function(password) {
+			console.log("Inside Password Validator");
 			return Validator.passwordValidator(password);
 		};
 	

@@ -32,6 +32,8 @@ serveApp.controller('AppCtrl', ['$scope','$state','$auth',function($scope,$state
 		}]
 	}
 	];
+		
+	 
 
 	$scope.toggleOptions = function (option){
 		if(option.items.length != 0){
